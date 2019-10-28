@@ -20,7 +20,7 @@ class CreatePlansTable extends Migration {
 			$table->decimal('price',6,2);
 			$table->boolean('status')->default('0');
 			$table->boolean('teams_enabled')->default('0');
-			$table->boolean('team_limit')->nullable();
+			$table->integer('team_limit')->nullable();
 			$table->timestamps();
 		});
 	}

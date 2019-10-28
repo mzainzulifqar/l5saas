@@ -20,7 +20,7 @@ class PlanSeeder extends Seeder {
 				'gateway_id' => 'monthly_20',
 				'status' => true,
 				'teams_enabled' => false,
-				'team_limit' => null,
+				'team_limit' => 0,
 			],
 
 			[
@@ -30,7 +30,7 @@ class PlanSeeder extends Seeder {
 				'gateway_id' => 'yearly_80',
 				'status' => true,
 				'teams_enabled' => false,
-				'team_limit' => null,
+				'team_limit' => 0,
 			],
 
 			[
