@@ -16,7 +16,7 @@
                     @endif
 
                     
-                    <h2 class="text-center">Welcome!</h2>
+                    <h2 class="text-center">Welcome!!</h2>
                 </div>
             </div>
         </div>
