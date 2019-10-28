@@ -1,12 +1,11 @@
 <?php
 
 $dbopts = parse_url(getenv('DATABASE_URL'));
-
-$user =  $dbopts["user"] ?? null;
-$password =  $dbopts["pass"] ?? null;
-$host =  $dbopts["host"] ?? null;
-$port =  $dbopts["port"] ?? null;
-$dbname =  ltrim($dbopts["path"],'/') ?? null;
+$username = $dbopts["user"] ?? null;
+$password = $dbopts["pass"] ?? null;
+$host = $dbopts["host"] ?? null;
+$port = $dbopts["port"] ?? null;
+$dbname = ltrim($dbopts["path"], '/') ?? null;
 
 return [
 
@@ -21,7 +20,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'postgresql'),
+    'default' => env('DB_CONNECTION', 'pgsql_production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -81,17 +80,15 @@ return [
             'sslmode' => 'prefer',
         ],
 
-
-        'postgresql' => [
+        'pgsql_production' => [
             'driver' => 'pgsql',
             'host' => $host,
             'port' => $port,
             'database' => $dbname,
-            'username' =>$user,
+            'username' => $username,
             'password' => $password,
             'charset' => 'utf8',
             'prefix' => '',
-            'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
