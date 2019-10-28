@@ -89,7 +89,7 @@ return [
             'database' => $dbname,
             'username' =>$user,
             'password' => $password,
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
