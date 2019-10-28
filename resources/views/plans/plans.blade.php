@@ -6,11 +6,11 @@
 		<h3 class="text-center" style="padding-bottom: 20px;">Plans</h3>
 		
 		<div class="row">
+        
 		
-	   <div class="pricing card-deck flex-column flex-md-row mb-3">
        
         @forelse($plans as $plan)
-
+        <div class="col-md-4 col-xs-12 col-sm-12">
         <div class="card card-pricing text-center px-3 mb-4">
             <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">{{$plan->name}}</span>
             <div class="bg-transparent card-header pt-4 border-0">
@@ -25,13 +25,14 @@
                 <a href="{{route('subscription.store',['plan' => $plan->slug])}}" class="btn btn-outline-secondary mb-3">Order now</a>
             </div>
         </div>
+        </div>
        @empty
        @endforelse
 
 
 
        @if (request()->url() != route('plans.team'))
-       
+        <div class="col-md-4 col-xs-12 col-sm-12">
         <div class="card card-pricing popular shadow text-center px-3 mb-4">
             <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Team plans</span>
             <div class="bg-transparent card-header pt-4 border-0">
@@ -47,11 +48,12 @@
                 <a href="{{ route('plans.team') }}" class="btn btn-primary mb-3">View Now</a>
             </div>
         </div>
+    </div>
       @endif
 
     </div>
 
-		</div>
+		
 	</div>
 
 @endsection()
