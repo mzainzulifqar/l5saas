@@ -16,7 +16,7 @@ class CreateSubscriptionsTable extends Migration {
 			$table->increments('id');
 			$table->unsignedInteger('user_id');
 			$table->string('name');
-			$table->string('stripe_id')->collation('UTF8');
+			$table->string('stripe_id');
 			$table->string('stripe_plan');
 			$table->integer('quantity');
 			$table->timestamp('trial_ends_at')->nullable();
