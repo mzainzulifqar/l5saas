@@ -18,8 +18,8 @@ class PlanSeeder extends Seeder {
 				'slug' => 'monthly',
 				'price' => '20',
 				'gateway_id' => 'monthly_20',
-				'status' => true,
-				'teams_enabled' => false,
+				'status' => 1,
+				'teams_enabled' => 0,
 				'team_limit' => 0,
 			],
 
@@ -28,8 +28,8 @@ class PlanSeeder extends Seeder {
 				'slug' => 'yearly',
 				'price' => '80',
 				'gateway_id' => 'yearly_80',
-				'status' => true,
-				'teams_enabled' => false,
+				'status' => 1,
+				'teams_enabled' => 0,
 				'team_limit' => 0,
 			],
 
@@ -38,8 +38,8 @@ class PlanSeeder extends Seeder {
 				'slug' => 'monthly-for-10-users',
 				'price' => '100',
 				'gateway_id' => 'team_monthly_20',
-				'status' => true,
-				'teams_enabled' => true,
+				'status' => 1,
+				'teams_enabled' => 1,
 				'team_limit' => 10,
 			],
 
@@ -48,8 +48,8 @@ class PlanSeeder extends Seeder {
 				'slug' => 'yearly-for-20-users',
 				'price' => '200',
 				'gateway_id' => 'team_yearly_20',
-				'status' => true,
-				'teams_enabled' => true,
+				'status' => 1,
+				'teams_enabled' => 1,
 				'team_limit' => 20,
 			],
 
