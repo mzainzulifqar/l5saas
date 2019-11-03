@@ -83,6 +83,6 @@ class RegisterController extends Controller {
         // fireing an event here
         event(new UserActivationEvent($user));
 
-        return redirect($this->redirectTo)->withStatus('Fresh Activation Link has been sent.Please verify within next 10minutes');
+        return redirect($this->redirectTo)->withStatus('Fresh Activation Link has been sent.Please verify within next 10 minutes');
     }
 }
