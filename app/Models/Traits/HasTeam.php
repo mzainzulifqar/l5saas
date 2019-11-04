@@ -47,7 +47,16 @@ trait HasTeam {
 	 */
 	public function isTeamEnabled() {
 
-		return $this->plan[0]->isTeamEnabled();
+		if(isset($this->plan[0]) && $this->plan[0] != null)
+		{
+			return $this->plan[0]->isTeamEnabled();	
+		}
+		else
+		{
+			return false;
+		}
+		
+
 	}
 
 }
