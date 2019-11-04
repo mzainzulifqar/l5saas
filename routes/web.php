@@ -56,6 +56,7 @@ Route::group(['prefix' => 'teams','namespace' => 'Account','middleware' => ['aut
 
 	Route::get('/','TeamSubscriptionController@index')->name('teams.index');
 	Route::post('/team_name','TeamSubscriptionController@update')->name('teams.update');
+	Route::post('/add/members/{team_id}', 'TeamSubscriptionController@addMembers')->name('teams.addMembers');
 });
 
 // Subscription  route

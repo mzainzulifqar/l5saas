@@ -4,17 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
-{
-    protected $fillable = ['name'];
+class Team extends Model {
 
-     /**
-     * Owner of team
-     *
-     * @return void
-     */
-     public function owner(){
-     	
-     	return $this->belongsTo(User::class);
+	protected $fillable = ['name'];
+
+	/**
+	 * Owner of team
+	 *
+	 * @return void
+	 */
+	public function owner() {
+
+		return $this->belongsTo(User::class);
+	}
+
+	/**
+	 * Getting users belongsTo Specific team
+	 *
+	 * @return void
+	 */
+     public function users(){
+          
+          return $this->belongsToMany(User::class,'team_users')->withTimestamps();
      }
 }
