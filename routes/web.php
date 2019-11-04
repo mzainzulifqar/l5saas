@@ -15,6 +15,10 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/dashboard', 'DashboardController@index')->name('home');
 
+Route::get('/testing', function() {
+    dd(auth()->user()->isTeamEnabled());
+});
+
 // Account end here
 Route::group(['prefix' => 'account', 'middleware' => ['auth'], 'as' => 'account.', 'namespace' => 'Account'], function () {
 
@@ -44,6 +48,14 @@ Route::group(['prefix' => 'plans','middleware' => 'subscription.inactive'],funct
 
 	Route::get('/','PlansController@index')->name('plans.index');
 	Route::get('/team_plans','PlansController@team_plans')->name('plans.team');
+});
+
+
+// Teams  route
+Route::group(['prefix' => 'teams','namespace' => 'Account','middleware' => ['auth','subscription.DoesNotHaveTeamPlan']],function(){
+
+	Route::get('/','TeamSubscriptionController@index')->name('teams.index');
+	Route::post('/team_name','TeamSubscriptionController@update')->name('teams.update');
 });
 
 // Subscription  route

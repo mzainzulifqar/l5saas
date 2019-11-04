@@ -34,8 +34,18 @@ class Plan extends Model {
 	 *
 	 * @return void
 	 */
-     public static function scopeActive(Builder $builder){
-          
-          return $builder->where('status',1);
-     }
+	public static function scopeActive(Builder $builder) {
+
+		return $builder->where('status', 1);
+	}
+
+	/**
+	 * Checking is plan is for team
+	 *
+	 * @return void
+	 */
+	public function isTeamEnabled(){
+		
+		return $this->teams_enabled == true;
+	}
 }

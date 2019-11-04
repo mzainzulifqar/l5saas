@@ -5,6 +5,7 @@
 		
 		<a  href="{{route('account.profile')}}" class="list-group-item list-group-item-action" style="{{request()->url() == route('account.profile') ? 'border-left: 3px solid #e66761;' : ''}}">
 		 <i class="icon-pencil"></i> &nbsp;&nbsp;Profile</a>
+		 
 		<a href="{{route('account.password')}}" class="list-group-item list-group-item-action"
 		style="{{request()->url() == route('account.password') ? 'border-left: 3px solid #e66761;' : ''}}"> <i class="icon-lock"></i> &nbsp;&nbsp;Change Password</a>
 
@@ -30,6 +31,11 @@
 				@isCustomer()
 				 <a href="{{ route('subscription.update') }}" class="list-group-item list-group-item-action disabled">Card Update</a>
 				 @endisCustomer()
+
+
+				@isTeamPlan()
+				 <a href="{{ route('teams.index') }}" class="list-group-item list-group-item-action disabled">Manage Team</a>
+				@endisTeamPlan()
 			</div>
 </div>
 

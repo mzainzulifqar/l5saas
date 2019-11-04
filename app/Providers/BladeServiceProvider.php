@@ -47,5 +47,10 @@ class BladeServiceProvider extends ServiceProvider
 
             return auth()->user()->isCustomer();
         });
+
+        Blade::if('isTeamPlan',function (){
+
+            return auth()->user()->isTeamEnabled();
+        });
 	}
 }

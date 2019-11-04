@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\ResendActivationLink;
 use App\Events\UserActivationEvent;
+use App\Listeners\CreateDefaultTeam;
 use App\Listeners\SendActivationEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -20,9 +21,11 @@ class EventServiceProvider extends ServiceProvider {
 	protected $listen = [
 		Registered::class => [
 			SendEmailVerificationNotification::class,
+
 		],
 		UserActivationEvent::class => [
 			SendActivationEmail::class,
+			CreateDefaultTeam::class
 		],
 
 		ResendActivationLink::class => [

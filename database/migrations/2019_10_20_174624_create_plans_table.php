@@ -13,8 +13,8 @@ class CreatePlansTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('plans', function (Blueprint $table) {
-			$table->bigIncrements('id');
-			$table->string('name');
+			$table->bigIncrements('id')->index();
+			$table->string('name')->index();
 			$table->string('slug')->unique();
 			$table->string('gateway_id');
 			$table->decimal('price',6,2);

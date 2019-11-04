@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Models\Traits\HasConfirmationTokens;
 use App\Models\Traits\HasSubscription;
+use App\Models\Traits\HasTeam;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
 
 class User extends Authenticatable {
 
-	use Notifiable, HasConfirmationTokens, Billable, HasSubscription;
+	use Notifiable, HasConfirmationTokens, Billable, HasSubscription,HasTeam;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -60,7 +61,8 @@ class User extends Authenticatable {
 	 * @return void
 	 */
 	public function hasActivated() {
-		return !! $this->activated;
+		return !!$this->activated;
 	}
 
+	
 }
