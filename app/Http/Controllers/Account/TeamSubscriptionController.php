@@ -40,26 +40,41 @@ class TeamSubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function addMembers(Request $request,Team $team) {
-
+	public function addMembers(Request $request, Team $team) {
 
 		$request->validate(['member_email' => 'required|exists:users,email']);
-       	
-       	$user = User::where('email',$request->member_email)->firstOrFail();
 
-       	if(auth()->user()->isMember($team,$user))
-       	{
-       		
-       		return back()->with('success','Member is already on the team');
-       	}
-       	else
-       	{
-       		
-       		auth()->user()->addMember($team,$user);	
-       		return back()->with('success','Member added to the Team');
-       	}
+		$user = User::where('email', $request->member_email)->firstOrFail();
 
-       abort(404);
+		// checking if team limit reached
+		
+		if(auth()->user()->isTeamLimitReached())
+		{
+			return back()->with('error','Whoops! Team limit reached');
+		}
 
+		if (auth()->user()->isAlreadyOnTeam($user)) {
+
+			return back()->with('success', 'Member is already on the team');
+		} else {
+
+			auth()->user()->addMember($team, $user);
+			return back()->with('success', 'Member added to the Team');
+		}
+
+		abort(404);
+
+	}
+
+	/**
+	 * Removing member from team
+	 *
+	 * @return void
+	 */
+	public function removeMember(User $user){
+		
+		auth()->user()->team->users()->detach($user);
+
+		return back()->with('success','Removed from team Successfully');
 	}
 }

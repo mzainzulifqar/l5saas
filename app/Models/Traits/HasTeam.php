@@ -35,9 +35,10 @@ trait HasTeam {
 	 *
 	 * @return void
 	 */
-	 public function isMember(Team $team,$user){
+	 public function isAlreadyOnTeam($user){
 
-	 	return $team->users->contains('id',$user->id);
+
+	 	return $this->team->users->contains('id',$user->id);
 	 }
 
 	 /**
@@ -47,7 +48,7 @@ trait HasTeam {
 	 */
 	 public function addMember(Team $team,User $user){
 	 	
-	 	return $user->team_users()->attach($team);
+	 	return $this->team->users()->attach($user);
 	 }
 
 	/**
@@ -58,8 +59,6 @@ trait HasTeam {
 	public function removeMember(Team $team,User $user){
 		
 	}
-
-
 
 	/**
 	 * Getting user plans
@@ -100,5 +99,36 @@ trait HasTeam {
 		}
 		
 	}
+
+	 /**
+	 * Checking if Team Limit reached
+	 *
+	 * @return void
+	 */
+	 public function isTeamLimitReached(){
+	 	
+	 	if(auth()->user()->team->users()->count() == auth()->user()->plan[0]->team_limit)
+	 	{
+	 		return true;
+	 	}
+	 	else
+	 	{
+	 		return false;
+	 	}
+
+	 }
+
+
+	 /**
+	 * Team Limit helper
+	 *
+	 * @return void
+	 */
+	 public function PlanTeamLimit(){
+	 	
+	 	return $this->plan[0]->team_limit;
+	 	
+
+	 }
 
 }

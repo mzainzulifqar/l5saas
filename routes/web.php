@@ -10,14 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::get('/testing',function(){
+	
+});
+
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/dashboard', 'DashboardController@index')->name('home');
-
-Route::get('/testing', function() {
-    dd(auth()->user()->isTeamEnabled());
-});
 
 // Account end here
 Route::group(['prefix' => 'account', 'middleware' => ['auth'], 'as' => 'account.', 'namespace' => 'Account'], function () {
@@ -57,6 +58,7 @@ Route::group(['prefix' => 'teams','namespace' => 'Account','middleware' => ['aut
 	Route::get('/','TeamSubscriptionController@index')->name('teams.index');
 	Route::post('/team_name','TeamSubscriptionController@update')->name('teams.update');
 	Route::post('/add/members/{team_id}', 'TeamSubscriptionController@addMembers')->name('teams.addMembers');
+	Route::get('/remove/members/{user_id}', 'TeamSubscriptionController@removeMember')->name('teams.removeMembers');
 });
 
 // Subscription  route

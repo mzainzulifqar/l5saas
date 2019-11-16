@@ -37,7 +37,7 @@
 
                     <div class="form-group">
                             <label for="">Add Members</label>
-                            <input type="email" name="member_email" class="form-control @error('member_email') is-invalid @enderror" id="" placeholder="email" value="{{old('email')}}">
+                            <input type="email" name="member_email" class="form-control @error('member_email') is-invalid @enderror" id="" placeholder="Email" value="{{old('email')}}">
 
                             @error('member_email')
                             <span class="help-block text-danger">
@@ -52,7 +52,7 @@
 
                 {{-- displaying team members --}}
                 @if ($team->users->count())
-                
+                        <p class="pull-right">Team Members &nbsp;{{$team->users->count() .' / '. auth()->user()->PlanTeamLimit()}}</p>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -68,7 +68,8 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->pivot->created_at->toDateString()}}</td>
-                                <td><a href="#" class="btn btn-danger">Delete</a></td>
+
+                                <td><a href="{{ route('teams.removeMembers',$user->id) }}"  class="btn btn-danger">Delete</a></td>
                             </tr>
                             @empty
                                

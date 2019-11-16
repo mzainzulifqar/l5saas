@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::model('team_id', Team::class);
+        Route::model('user_id', User::class);
     }
 
     /**
