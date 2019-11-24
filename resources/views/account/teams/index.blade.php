@@ -30,8 +30,10 @@
         <div class="card-header bg-grey">Team Members</div>
              <div class="card-body">
 
+                @if ($team->users->count() < auth()->user()->PlanTeamLimit())
+                
                 <div style="padding-bottom: 10px;">
-                     <form action="{{ route('teams.addMembers',$team->id) }}" method="POST" role="form">
+                    <form action="{{ route('teams.addMembers',$team->id) }}" method="POST" role="form">
                         @csrf
 
 
@@ -49,7 +51,7 @@
                         <button type="submit" class="btn btn-outline-success">Add Member</button>
                     </form>
                 </div>
-
+                @endif()
                 {{-- displaying team members --}}
                 @if ($team->users->count())
                         <p class="pull-right">Team Members &nbsp;{{$team->users->count() .' / '. auth()->user()->PlanTeamLimit()}}</p>

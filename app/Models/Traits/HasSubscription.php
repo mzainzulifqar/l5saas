@@ -3,13 +3,18 @@
 namespace App\Models\Traits;
 
 trait HasSubscription {
-	
+
 	/**
 	 * Check if user has subscription
 	 *
 	 * @return void
 	 */
 	public function hasSubscribed() {
+
+		if ($this->hasPiggyBackSubscription()) {
+
+			return true;
+		}
 
 		return $this->subscribed('main');
 	}
@@ -22,6 +27,27 @@ trait HasSubscription {
 	public function hasNotSubscribed() {
 
 		return !$this->hasSubscribed();
+	}
+
+	/**
+	 * Check if the user has PiggyBackSubscription
+	 *
+	 * @return void
+	 */
+	public function hasPiggyBackSubscription() {
+
+		$teams = auth()->user()->team_users;
+
+		if ($teams) {
+			foreach ($teams as $team) {
+				if (!$this->team && $team->owner->hasSubscribed()) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+
 	}
 
 	/**

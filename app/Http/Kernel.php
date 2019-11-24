@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'subscription.customer' => \App\Http\Middleware\Subscription\RedirectIfNotCustomer::class,
         'subscription.inactive' => \App\Http\Middleware\Subscription\RedirectIfNotInactive::class,
         'subscription.DoesNotHaveTeamPlan' => \App\Http\Middleware\Subscription\Teams\RedirectIfDoesNotHaveTeamPlan::class,
+        'IsOnPiggyBackSubscription' => \App\Http\Middleware\Subscription\IsOnPiggyBackSubscription::class,
 
     ];
 

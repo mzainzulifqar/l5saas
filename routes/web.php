@@ -11,7 +11,9 @@
 |
  */
 Route::get('/testing',function(){
-	
+
+	dd(auth()->user()->hasSubscribed());
+
 });
 
 
@@ -71,14 +73,14 @@ Route::group(['prefix' => 'subscription','middleware' => ['auth'],'as' => 'subsc
 		});
 	
 
-		Route::group(['middleware' => 'subscription.cancelled'],function(){
+		Route::group(['middleware' => ['subscription.cancelled','IsOnPiggyBackSubscription']],function(){
 			
 			Route::get('/resume','SubscriptionController@resume_subscription')->name('resume');
 			Route::post('/resume','SubscriptionController@resume')->name('cancel.resume');
 			
 		});
 
-		Route::group(['middleware' => 'subscription.notcancelled'],function(){
+		Route::group(['middleware' => ['subscription.notcancelled','IsOnPiggyBackSubscription']],function(){
 			 
 			 /*Change Route */
 			Route::get('/change','SubscriptionController@change_subscription')->name('change');
@@ -89,6 +91,6 @@ Route::group(['prefix' => 'subscription','middleware' => ['auth'],'as' => 'subsc
 			
 		});
 
-		Route::get('update_card', 'SubscriptionController@update_card')->name('update')->middleware('subscription.customer');
-		Route::post('update_card', 'SubscriptionController@update')->name('update_card')->middleware('subscription.customer');
+		Route::get('update_card', 'SubscriptionController@update_card')->name('update')->middleware('subscription.customer','IsOnPiggyBackSubscription');
+		Route::post('update_card', 'SubscriptionController@update')->name('update_card')->middleware('subscription.customer','IsOnPiggyBackSubscription');
 });

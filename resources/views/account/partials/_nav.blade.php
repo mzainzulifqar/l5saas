@@ -13,9 +13,12 @@
 
 <div class="card" style="margin-bottom: 15px;">
 	<div class="card-header bg-grey"><i class="icon-credit-card"></i> &nbsp;&nbsp;Billing</div>
+	@hasPiggyBackSubscription
 		<div class="list-group">
 			@subscribed
 			
+			
+
 			 	@notCancelledSubscription
 					<a href="{{ route('subscription.change') }}" class="list-group-item list-group-item-action">Change Plan</a>
 
@@ -37,6 +40,10 @@
 				 <a href="{{ route('teams.index') }}" class="list-group-item list-group-item-action disabled">Manage Team</a>
 				@endisTeamPlan()
 			</div>
+			@else
+				<a href="javascript:" class="list-group-item list-group-item-action disabled">You are on Piggy Back Subscription</a>
+			@endhasPiggyBackSubscription
+
 </div>
 
 

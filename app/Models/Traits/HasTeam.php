@@ -46,7 +46,7 @@ trait HasTeam {
 	 *
 	 * @return void
 	 */
-	 public function addMember(Team $team,User $user){
+	 public function addMember(User $user){
 	 	
 	 	return $this->team->users()->attach($user);
 	 }
@@ -117,8 +117,7 @@ trait HasTeam {
 	 	}
 
 	 }
-
-
+	 
 	 /**
 	 * Team Limit helper
 	 *
@@ -127,7 +126,6 @@ trait HasTeam {
 	 public function PlanTeamLimit(){
 	 	
 	 	return $this->plan[0]->team_limit;
-	 	
 
 	 }
 

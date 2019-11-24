@@ -58,7 +58,7 @@ class TeamSubscriptionController extends Controller {
 			return back()->with('success', 'Member is already on the team');
 		} else {
 
-			auth()->user()->addMember($team, $user);
+			auth()->user()->addMember($user);
 			return back()->with('success', 'Member added to the Team');
 		}
 
