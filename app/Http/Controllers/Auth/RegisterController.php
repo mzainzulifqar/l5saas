@@ -80,7 +80,7 @@ class RegisterController extends Controller {
     {
         $this->guard()->logout();
 
-        // fireing an event here
+        // firing an event here
         event(new UserActivationEvent($user));
 
         return redirect($this->redirectTo)->withStatus('Fresh Activation Link has been sent.Please verify within next 10 minutes');

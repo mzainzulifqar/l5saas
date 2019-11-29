@@ -33,7 +33,7 @@
      
 
 </head>
-<body  style="background-color: #F5F3EF;">
+<body  style="background-color: #F5F3EF;background-image: url('{{asset('css/bgImage.svg')}}');background-size: cover;">
 <div id="app">
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">

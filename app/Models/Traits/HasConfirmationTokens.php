@@ -22,7 +22,7 @@ trait HasConfirmationTokens {
 	}
 
 	/**
-	 * Defining Expiretation time
+	 * Defining Expireation time
 	 *
 	 * @return void
 	 */
