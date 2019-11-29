@@ -6,6 +6,16 @@
             <div class="card">
                 <div class="card-header">Subscription</div>
                 <div class="card-body">
+
+                  @if (session()->has('error'))
+                    
+                  <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Whoops!</strong> {{session()->get('error')}}
+                  </div>
+                  
+                  @endif
+
                      <form action="{{ route('subscription.store') }}" method="POST" role="form" id="payment-form">
                     @csrf
 

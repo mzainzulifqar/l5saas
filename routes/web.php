@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Crypt;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,8 +14,21 @@
  */
 Route::get('/testing',function(){
 
-	dd(auth()->user()->hasSubscribed());
+	$string = 1;
+	echo $string."<br>";
+	$eny = Crypt::encrypt($string);
+	echo $eny."<br>";
+	echo "decrypted = ".decrypt($eny);
 
+	// dd(auth()->user()->hasSubscribed());
+
+});
+
+Route::get('/test2/{id}',function($Id){
+	
+	$id = decrypt($Id);
+	$user = App\Models\User::findOrFail($id);
+	dd($user->name);
 });
 
 

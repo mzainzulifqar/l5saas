@@ -27,13 +27,24 @@ class SubscriptionController extends Controller {
 	 */
 	public function store(CouponRequest $request) {
 
+		// making a subscription
 		$subscriber = auth()->user()->newSubscription('main', $request->plans);
 
+		// checking if he has a coupon
 		if ($request->has('coupon')) {
 			$subscriber->withCoupon($request->coupon);
 		}
 
-		$subscriber->create($request->stripeToken);
+		// making payment to stripe
+		try {
+
+			$subscriber->create($request->stripeToken);
+
+		} catch (\Exception $e) {
+
+			return redirect()->to('/subscription')->with('error', $e->getMessage());
+
+		}
 
 		return redirect('/')->withStatus('Thanks for being a subscriber!');
 	}
@@ -66,7 +77,8 @@ class SubscriptionController extends Controller {
 	 */
 	public function change_subscription() {
 
-		return view('account.subscriptionHandler.changeSubscription');
+		$plans = Plan::except(auth()->user()->plan[0]->id)->active()->get();
+		return view('account.subscriptionHandler.changeSubscription', get_defined_vars());
 	}
 
 	/**

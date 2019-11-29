@@ -20,13 +20,23 @@ class Plan extends Model {
 	}
 
 	/**
-	 * Query scope for Team plan
+	 * Query scope for excluding Current Plan
 	 *
 	 * @return void
 	 */
-	public static function scopeTeamsPlan(Builder $builder) {
+	public static function scopeExcept(Builder $builder,$planId) {
 
-		return $builder->where('teams_enabled', true);
+		return $builder->where('id','!=',$planId);
+	}
+
+	/**
+	 * Query scope for Excluding current plab
+	 *
+	 * @return void
+	 */
+	public static function scopeTeamsPlan(Builder $builder,$planId) {
+
+		return $builder->where('id','!=', $planId);
 	}
 
 	/**

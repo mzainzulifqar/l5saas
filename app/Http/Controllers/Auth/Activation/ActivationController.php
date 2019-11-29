@@ -58,7 +58,7 @@ class ActivationController extends Controller {
 			return redirect('/');
 
 		}
-
+		
 		// activating user account
 		$token->user->activateUserAccount();
 
