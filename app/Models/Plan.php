@@ -30,13 +30,13 @@ class Plan extends Model {
 	}
 
 	/**
-	 * Query scope for Excluding current plab
+	 * Query scope for Excluding current plan
 	 *
 	 * @return void
 	 */
-	public static function scopeTeamsPlan(Builder $builder,$planId) {
+	public static function scopeTeamsPlan(Builder $builder) {
 
-		return $builder->where('id','!=', $planId);
+		return $builder->where('teams_enabled',true);
 	}
 
 	/**
@@ -57,5 +57,26 @@ class Plan extends Model {
 	public function isTeamEnabled(){
 		
 		return $this->teams_enabled == true;
+	}
+
+	/**
+	* Checking if the plan
+	* is not for team
+	*
+	* @return void
+	*/
+	public function isNotForTeam(){
+		
+		return !$this->isTeamEnabled();
+	}
+
+	/**
+	* Checking the teamLimit of Plan
+	*
+	* @return void
+	*/
+	public function PlanTeamLimit(){
+		
+		return $this->team_limit;
 	}
 }

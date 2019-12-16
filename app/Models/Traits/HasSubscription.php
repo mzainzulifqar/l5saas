@@ -45,7 +45,7 @@ trait HasSubscription {
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -79,4 +79,5 @@ trait HasSubscription {
 		return $this->hasCardOnFile();
 	}
 
+	
 }

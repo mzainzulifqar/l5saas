@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
 
+
         /*
          * Application Service Providers...
          */
@@ -175,6 +176,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
+        App\Providers\TwoFactorServiceProvider::class,
+
 
     ],
 
@@ -226,6 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
 
     ],
 

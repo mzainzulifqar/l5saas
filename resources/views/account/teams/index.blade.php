@@ -71,7 +71,7 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->pivot->created_at->toDateString()}}</td>
 
-                                <td><a href="{{ route('teams.removeMembers',$user->id) }}"  class="btn btn-danger">Delete</a></td>
+                                <td><a href="{{ route('teams.removeMembers',$user->id) }}"  class="btn btn-danger">Remove</a></td>
                             </tr>
                             @empty
                                

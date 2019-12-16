@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Plan;
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class PlanSeeder extends Seeder {
@@ -11,6 +13,17 @@ class PlanSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
+
+
+		$user = User::create([
+			'name' => 'Admin',
+			'email' => 'admin@gmail.com',
+			'password' => bcrypt('secret'),
+			'activated' => true,
+		]);
+
+		Team::create(['user_id' => $user->id,'name' => 'LaraThunder']);
+
 		$plans = [
 
 			[

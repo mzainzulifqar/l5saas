@@ -12,5 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(PlanSeeder::class);
+        $this->call(CountryTableSeeder::class);
+
     }
 }

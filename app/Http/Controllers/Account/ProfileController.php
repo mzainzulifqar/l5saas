@@ -40,7 +40,7 @@ class ProfileController extends Controller {
 	}
 
 	/**
-	 * Passwording updating
+	 * Password updating
 	 *
 	 * @return void
 	 */
