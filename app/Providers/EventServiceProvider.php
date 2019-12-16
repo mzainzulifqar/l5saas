@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\AccountDeactivation;
 use App\Events\ResendActivationLink;
 use App\Events\UserActivationEvent;
+use App\Listeners\AccountDeactivationListener;
 use App\Listeners\CreateDefaultTeam;
 use App\Listeners\SendActivationEmail;
 use Illuminate\Auth\Events\Registered;
@@ -30,6 +32,10 @@ class EventServiceProvider extends ServiceProvider {
 
 		ResendActivationLink::class => [
 			SendActivationEmail::class,
+		],
+
+		AccountDeactivation::class => [
+			AccountDeactivationListener::class,
 		],
 
 	];

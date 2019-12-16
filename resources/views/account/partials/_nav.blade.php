@@ -8,6 +8,12 @@
 		 
 		<a href="{{route('account.password')}}" class="list-group-item list-group-item-action"
 		style="{{request()->url() == route('account.password') ? 'border-left: 3px solid #e66761;' : ''}}"> <i class="icon-lock"></i> &nbsp;&nbsp;Change Password</a>
+		
+		<a href="{{route('account.deactive.index')}}" class="list-group-item list-group-item-action"
+		style="{{request()->url() == route('account.deactive.index') ? 'border-left: 3px solid #e66761;' : ''}}"> <i class="icon-anchor"></i> &nbsp;&nbsp;Deactivate Account</a>
+
+		<a href="{{route('account.twoFactor.index')}}" class="list-group-item list-group-item-action"
+		style="{{request()->url() == route('account.twoFactor.index') ? 'border-left: 3px solid #e66761;' : ''}}"> <i class="icon-flag-alt"></i> &nbsp;&nbsp;Two Factor Auth</a>
 
 </div>
 

@@ -82,6 +82,52 @@ class SubscriptionController extends Controller {
 	}
 
 	/**
+	 * Swapping/Changing the plan
+	 *
+	 * @return void
+	 */
+	public function changeSubscriptionPlan(Request $request) {
+
+		// grabbing the user here
+
+		$user = $request->user();
+
+		$request->validate(['plan' => 'required|exists:plans,gateway_id']);
+
+		$plan = Plan::where('gateway_id', $request->plan)->firstOrFail();
+
+		if ($this->isDownGradeFromTeamPlan($user, $plan)) {
+
+			$user->team->users()->detach();
+		}
+
+		if ($user->team->users->count() > $plan->PlanTeamLimit()) {
+
+			return back()->with('error',"Remove members from Team New plan limit is" . ' ' . $plan->PlanTeamLimit());
+		}
+
+		$user->subscription('main')->swap($plan->gateway_id);
+
+		return back()->with('success', 'Plan Changed Successfully');
+	}
+
+	/**
+	 * Checking if the current plan
+	 * is team plan before swapping
+	 *
+	 * @return void
+	 */
+	public function isDownGradeFromTeamPlan($user, Plan $plan) {
+
+		if ($plan->isNotForTeam()) {
+			return true;
+		}
+
+		return false;
+
+	}
+
+	/**
 	 * Showing form for resume Subscription
 	 *
 	 * @return void

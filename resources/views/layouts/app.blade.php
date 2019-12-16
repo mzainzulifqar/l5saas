@@ -7,8 +7,8 @@
     <link rel="icon" href="{{ asset('icon/spark.png') }}" sizes="40x40">
 
     <!-- Scripts js -->
-    <script src="https://js.stripe.com/v3/"></script>
-    
+    {{-- <script src="https://js.stripe.com/v3/"></script> --}}
+
        
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,7 +18,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" >
-    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,9 +27,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-    <link rel=stylesheet href="{{ asset('stripe/stripe.css') }}">
+    {{-- <link rel=stylesheet href="{{ asset('stripe/stripe.css') }}"> --}}
 
-     
+    @stack('css')
 
 </head>
 <body  style="background-color: #F5F3EF;background-image: url('{{asset('css/bgImage.svg')}}');background-size: cover;">
