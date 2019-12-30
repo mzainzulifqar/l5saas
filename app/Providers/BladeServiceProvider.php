@@ -35,7 +35,8 @@ class BladeServiceProvider extends ServiceProvider
 
         Blade::if('cancelledSubscription',function (){
 
-            return auth()->user()->hasCancelledSubscription();
+            return auth()->user()->cancelledAndIsOnGracePeriod();
+
         });
 
         Blade::if('notCancelledSubscription',function (){

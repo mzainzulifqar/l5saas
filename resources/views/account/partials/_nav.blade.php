@@ -41,10 +41,11 @@
 				 <a href="{{ route('subscription.update') }}" class="list-group-item list-group-item-action disabled">Card Update</a>
 				 @endisCustomer()
 
-
+			@subscribed()
 				@isTeamPlan()
 				 <a href="{{ route('teams.index') }}" class="list-group-item list-group-item-action disabled">Manage Team</a>
 				@endisTeamPlan()
+			@endsubscribed()
 			</div>
 			@else
 				<a href="javascript:" class="list-group-item list-group-item-action disabled">You are on Piggy Back Subscription</a>

@@ -11,6 +11,8 @@ class TeamSubscriptionController extends Controller {
 
 	public function __construct() {
 
+
+		
 	}
 
 	/**
@@ -20,6 +22,11 @@ class TeamSubscriptionController extends Controller {
 	 */
 	public function index(Request $request) {
 
+		if(!auth()->user()->subscribed('main'))
+		{
+			return back();
+		}
+		
 		$team = auth()->user()->team;
 		return view('account.teams.index', get_defined_vars());
 	}

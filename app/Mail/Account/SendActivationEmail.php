@@ -7,7 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendActivationEmail extends Mailable {
+class SendActivationEmail extends Mailable implements ShouldQueue
+{
 
 	use Queueable, SerializesModels;
 
@@ -17,7 +18,8 @@ class SendActivationEmail extends Mailable {
 	 *
 	 * @return void
 	 */
-	public function __construct($token) {
+	public function __construct($token)
+	{
 
 		$this->token = $token;
 	}
@@ -27,7 +29,8 @@ class SendActivationEmail extends Mailable {
 	 *
 	 * @return $this
 	 */
-	public function build() {
+	public function build()
+	{
 
 		return $this->markdown('emails.activateAccount');
 	}
