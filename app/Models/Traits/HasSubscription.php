@@ -2,16 +2,19 @@
 
 namespace App\Models\Traits;
 
-trait HasSubscription {
+trait HasSubscription
+{
 
 	/**
 	 * Check if user has subscription
 	 *
 	 * @return void
 	 */
-	public function hasSubscribed() {
+	public function hasSubscribed()
+	{
 
-		if ($this->hasPiggyBackSubscription()) {
+		if ($this->hasPiggyBackSubscription())
+		{
 
 			return true;
 		}
@@ -24,7 +27,8 @@ trait HasSubscription {
 	 *
 	 * @return void
 	 */
-	public function hasNotSubscribed() {
+	public function hasNotSubscribed()
+	{
 
 		return !$this->hasSubscribed();
 	}
@@ -34,13 +38,17 @@ trait HasSubscription {
 	 *
 	 * @return void
 	 */
-	public function hasPiggyBackSubscription() {
+	public function hasPiggyBackSubscription()
+	{
 
 		$teams = auth()->user()->team_users;
 
-		if ($teams) {
-			foreach ($teams as $team) {
-				if (!$this->team && $team->owner->hasSubscribed()) {
+		if ($teams)
+		{
+			foreach ($teams as $team)
+			{
+				if (!$this->team && $team->owner->hasSubscribed())
+				{
 					return true;
 				}
 			}
@@ -54,7 +62,8 @@ trait HasSubscription {
 	 *
 	 * @return void
 	 */
-	public function hasCancelledSubscription() {
+	public function hasCancelledSubscription()
+	{
 
 		return optional($this->subscription('main'))->cancelled();
 	}
@@ -64,7 +73,8 @@ trait HasSubscription {
 	 *
 	 * @return void
 	 */
-	public function hasNotCancelledSubscription() {
+	public function hasNotCancelledSubscription()
+	{
 
 		return !$this->hasCancelledSubscription();
 	}
@@ -74,10 +84,36 @@ trait HasSubscription {
 	 *
 	 * @return void
 	 */
-	public function isCustomer() {
+	public function isCustomer()
+	{
 
 		return $this->hasCardOnFile();
 	}
 
-	
+	/**
+	 * Check if the user is on GracePeriod
+	 *
+	 * @return void
+	 */
+	public function isOnGracePeriod()
+	{
+		return optional($this->subscription('main'))->onGracePeriod();
+	}
+
+	/**
+	 * Check if the subscription is cancelled
+	 * and is on gracePeriod
+	 *
+	 * @return void
+	 */
+	public function cancelledAndIsOnGracePeriod()
+	{
+		if ($this->hasCancelledSubscription() && $this->isOnGracePeriod())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 }

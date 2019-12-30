@@ -39,7 +39,7 @@ class TwoFactorAuthenticationController extends Controller {
 
 		$request->validate([
 			'country' => 'required|exists:countries,dialing_code',
-			'number' => 'required',
+			'number' => 'required|unique:two_factor,phone',
 		]);
 
 		$user = $request->user();

@@ -15,10 +15,11 @@ class RedirectIfCancelled
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->hasNotCancelledSubscription())
+        if(!auth()->user()->cancelledAndIsOnGracePeriod())
         {
             return redirect('/account');
         }
+
         return $next($request);
     }
 }

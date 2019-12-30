@@ -10,18 +10,28 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-// Route::get('/testing',function(){
 
-// 	// $user = auth()->user();
-// 	// dd($user->team->users()->attach(factory('App\Models\User',10)->create()));
-
-// });
+Route::get('/testing', function ()
+{
+	dd(auth()->user()->subscribed('main'));
+// dd(session()->all());
+	// $user = auth()->user();
+	// dd($user->team->users()->attach(factory('App\Models\User',10)->create()));
+	// return redirect()->to('account/twoFactor/login');
+});
 
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/dashboard', 'DashboardController@index')->name('home');
 
+Route::group(['prefix' => 'account', 'middleware' => 'guest', 'namespace' => 'Account'], function ()
+{
+	// twoFactor AuthenticationLogin
+	Route::get('/twoFactor/login', 'TwoFactorAuthenticationLogin@login');
+	Route::post('/twoFactor/login', 'TwoFactorAuthenticationLogin@loginWithCode')->name('twoFactor.login');
+	// end of twoFactor AuthenticationLogin
+});
 // Account end here
 Route::group(['prefix' => 'account', 'middleware' => ['auth'], 'as' => 'account.', 'namespace' => 'Account'], function ()
 {
@@ -46,7 +56,6 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth'], 'as' => 'account.
 	Route::post('twoFactor', 'TwoFactorAuthenticationController@store')->name('twoFactor.store');
 	Route::post('twoFactor/verify', 'TwoFactorAuthenticationController@codeVerify')->name('twoFactor.verify');
 	Route::post('twoFactor/cancel', 'TwoFactorAuthenticationController@destroy')->name('twoFactor.destroy');
-
 	// end of twoFactor
 
 });
