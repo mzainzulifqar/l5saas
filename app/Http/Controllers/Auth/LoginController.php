@@ -88,7 +88,6 @@ class LoginController extends Controller
 
 		$this->guard()->logout();
 
-
 		return redirect()->to('account/twoFactor/login');
     
 		}

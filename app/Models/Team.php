@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasInviteToken;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model {
+
+	use HasInviteToken;
 
 	protected $fillable = ['name'];
 
@@ -28,4 +31,5 @@ class Team extends Model {
           
           return $this->belongsToMany(User::class,'team_users')->withTimestamps();
      }
+
 }

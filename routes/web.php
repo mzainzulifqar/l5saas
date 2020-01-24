@@ -13,11 +13,31 @@
 
 Route::get('/testing', function ()
 {
-	dd(auth()->user()->subscribed('main'));
-// dd(session()->all());
-	// $user = auth()->user();
-	// dd($user->team->users()->attach(factory('App\Models\User',10)->create()));
-	// return redirect()->to('account/twoFactor/login');
+	// /testing?color=gold
+	
+	$mobiles = array(
+
+		'Huawei' => array('black', 'red', 'rose-gold'),
+		'mi' => array('black', 'red', 'rose-gold'),
+		'sumsang' => array('black', 'red', 'rose-gold'),
+		'iphone' => array('mate back', 'red', 'rose-gold'),
+		'oppo' => array('black', 'yellow', 'rose-gold'),
+		'nokia' => array('black', 'white', 'gold'),
+	);
+
+	$brands = array();
+
+	foreach ($mobiles as $key => $values)
+	{
+
+		if (in_array(request()->color, $values))
+		{
+			array_push($brands, $key);
+		}
+	}
+
+	dd($brands);
+
 });
 
 Auth::routes();
@@ -86,6 +106,8 @@ Route::group(['prefix' => 'teams', 'namespace' => 'Account', 'middleware' => ['a
 	Route::post('/team_name', 'TeamSubscriptionController@update')->name('teams.update');
 	Route::post('/add/members/{team_id}', 'TeamSubscriptionController@addMembers')->name('teams.addMembers');
 	Route::get('/remove/members/{user_id}', 'TeamSubscriptionController@removeMember')->name('teams.removeMembers');
+	Route::post('/invite/members','TeamSubscriptionController@inviteMemeber')->name('invite.team.member');
+	Route::get('accept/{token}/invite','TeamSubscriptionController@acceptinvite')->name('accept.invite.team.member');
 });
 
 // Subscription  route
