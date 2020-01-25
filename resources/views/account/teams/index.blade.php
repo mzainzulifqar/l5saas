@@ -126,7 +126,7 @@
                         </tbody>
                     </table>
                 @else
-                   <h2 class="text-center">You've added any members yet!</h2>
+                   <h2 class="text-center">You haven't added any members yet!</h2>
                 @endif
                
              </div>
