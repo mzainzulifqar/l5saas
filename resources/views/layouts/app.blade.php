@@ -7,7 +7,7 @@
     <link rel="icon" href="{{ asset('icon/spark.png') }}" sizes="40x40">
 
     <!-- Scripts js -->
-    {{-- <script src="https://js.stripe.com/v3/"></script> --}}
+    <script src="https://js.stripe.com/v3/"></script>
 
        
     <!-- CSRF Token -->
@@ -27,7 +27,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-    {{-- <link rel=stylesheet href="{{ asset('stripe/stripe.css') }}"> --}}
+    <link rel=stylesheet href="{{ asset('stripe/stripe.css') }}">
 
     @stack('css')
 

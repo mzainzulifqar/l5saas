@@ -6,14 +6,16 @@ use App\Http\Requests\CouponRequest;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 
-class SubscriptionController extends Controller {
+class SubscriptionController extends Controller
+{
 
 	/**
 	 * index method
 	 *
 	 * @return void
 	 */
-	public function index() {
+	public function index()
+	{
 
 		$plans = Plan::active()->get();
 		return view('plans.checkout', get_defined_vars());
@@ -25,13 +27,15 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function store(CouponRequest $request) {
+	public function store(CouponRequest $request)
+	{
 
 		// making a subscription
 		$subscriber = auth()->user()->newSubscription('main', $request->plans);
 
 		// checking if he has a coupon
-		if ($request->has('coupon')) {
+		if ($request->has('coupon'))
+		{
 			$subscriber->withCoupon($request->coupon);
 		}
 
@@ -40,9 +44,18 @@ class SubscriptionController extends Controller {
 
 			$subscriber->create($request->stripeToken);
 
-		} catch (\Exception $e) {
+		}
+		catch (\Exception $e)
+		{
 
 			return redirect()->to('/subscription')->with('error', $e->getMessage());
+
+		}
+
+		if (substr($request->plans, 0, 4) == 'team')
+		{
+
+			$request->user()->team()->create(['name' => $request->user()->name]);
 
 		}
 
@@ -54,7 +67,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function cancel_subscription() {
+	public function cancel_subscription()
+	{
 
 		return view('account.subscriptionHandler.cancelSubscription');
 	}
@@ -64,7 +78,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function cancel(Request $request) {
+	public function cancel(Request $request)
+	{
 
 		$request->user()->subscription('main')->cancel();
 		return redirect('/account')->with('success', 'Subscription has been cancelled Successfully');
@@ -75,7 +90,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function change_subscription() {
+	public function change_subscription()
+	{
 
 		$plans = Plan::except(auth()->user()->plan[0]->id)->active()->get();
 		return view('account.subscriptionHandler.changeSubscription', get_defined_vars());
@@ -86,7 +102,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function changeSubscriptionPlan(Request $request) {
+	public function changeSubscriptionPlan(Request $request)
+	{
 
 		// grabbing the user here
 
@@ -96,14 +113,23 @@ class SubscriptionController extends Controller {
 
 		$plan = Plan::where('gateway_id', $request->plan)->firstOrFail();
 
-		if ($this->isDownGradeFromTeamPlan($user, $plan)) {
+		if ($this->isDownGradeFromTeamPlan($user, $plan))
+		{
 
 			$user->team->users()->detach();
 		}
 
-		if ($user->team->users->count() > $plan->PlanTeamLimit()) {
+		if (isset($user->team) && $user->team->users->count() > $plan->PlanTeamLimit())
+		{
 
-			return back()->with('error',"Remove members from Team New plan limit is" . ' ' . $plan->PlanTeamLimit());
+			return back()->with('error', "Remove members from Team New plan limit is" . ' ' . $plan->PlanTeamLimit());
+		}
+
+		if (!isset($user->team) && $plan->isTeamEnabled())
+		{
+
+			$request->user()->team()->create(['name' => $request->user()->name]);
+
 		}
 
 		$user->subscription('main')->swap($plan->gateway_id);
@@ -117,9 +143,11 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function isDownGradeFromTeamPlan($user, Plan $plan) {
+	public function isDownGradeFromTeamPlan($user, Plan $plan)
+	{
 
-		if ($plan->isNotForTeam()) {
+		if ($plan->isNotForTeam())
+		{
 			return true;
 		}
 
@@ -132,7 +160,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function resume_subscription() {
+	public function resume_subscription()
+	{
 
 		return view('account.subscriptionHandler.resumeSubscription');
 	}
@@ -142,7 +171,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function resume(Request $request) {
+	public function resume(Request $request)
+	{
 
 		$request->user()->subscription('main')->resume();
 		return redirect('/account')->with('success', 'Subscription has been resumed Successfully');
@@ -153,7 +183,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function update_card() {
+	public function update_card()
+	{
 
 		return view('account.subscriptionHandler.updateCard');
 	}
@@ -163,7 +194,8 @@ class SubscriptionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function update(Request $request) {
+	public function update(Request $request)
+	{
 
 		$request->user()->updateCard($request->stripeToken);
 		return redirect('/account')->with('success', 'Card has been updated Successfully');

@@ -27,7 +27,7 @@ class EventServiceProvider extends ServiceProvider {
 		],
 		UserActivationEvent::class => [
 			SendActivationEmail::class,
-			CreateDefaultTeam::class
+			// CreateDefaultTeam::class
 		],
 
 		ResendActivationLink::class => [

@@ -17,8 +17,9 @@
 		 		@csrf
 		 		<div class="form-group">
 		 			<label for="">Change Plan</label>
-		 			
+
 		 			<select name="plan" class="form-control @error('plan') is-invalid @enderror" required="required">
+
 		 				@forelse($plans as $plan)
 		 				<option value="{{$plan->gateway_id}}">{{$plan->name}}</option>
 		 				@empty

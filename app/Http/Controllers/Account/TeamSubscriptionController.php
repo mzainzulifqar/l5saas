@@ -145,7 +145,10 @@ class TeamSubscriptionController extends Controller
 
 			return redirect()->to('/account')->with('success','Have Fun');
 		}
+		else
+		{
+			return redirect()->to('/login')->with('status','Sorry Email Already Registered.');
+		}
 	
-
 	}
 }
