@@ -14,7 +14,7 @@ $real_path = realpath(__DIR__) . DIRECTORY_SEPARATOR . 'sparky' . DIRECTORY_SEPA
 
 Route::get('/testing', function ()
 {
-	// /testing?color=gold
+	//
 });
 
 Auth::routes();

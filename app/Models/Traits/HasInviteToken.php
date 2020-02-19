@@ -24,7 +24,6 @@ trait HasInviteToken
 	 */
 	public function CreatingEntry($email)
 	{
-
 		$invite = $this->invite()->create(['email' => $email,'token' => $token = str_random(30)]);
 		return $invite->token;
 	}

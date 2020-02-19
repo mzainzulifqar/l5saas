@@ -50,7 +50,7 @@ class ProfileController extends Controller {
 			'password' => bcrypt($request->password),
 		]);
 
-		Mail::to($request->user()->email)->send(new PasswordUpdate());
+		// Mail::to($request->user()->email)->send(new PasswordUpdate());
 
 		return redirect()->to('/account')->with('success', 'Password has been updated');
 	}
