@@ -30,7 +30,6 @@ class ConfirmationToken extends Model {
 	public function TokenExpired() {
 
 		return \Carbon\Carbon::now()->gt($this->expires_at);
-
 	}
 
 	/**

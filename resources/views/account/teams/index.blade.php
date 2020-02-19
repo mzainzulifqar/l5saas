@@ -30,6 +30,16 @@
         <div class="card-header bg-grey">Team Members</div>
              <div class="card-body">
 
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                     <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
                 @if ($team->users->count() < auth()->user()->PlanTeamLimit())
                 
                 <div style="padding-bottom: 10px;">
@@ -49,7 +59,43 @@
 
                     </div>
                         <button type="submit" class="btn btn-outline-success">Add Member</button>
+                        <a  href="javascript:" data-toggle="modal" data-target="#myModal" class="btn btn-outline-danger">Invite Member</a>
                     </form>
+
+
+
+                    {{-- starting modal code from here --}}
+
+                    <!-- Modal -->
+                <div id="myModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Invite Memeber</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ route('invite.team.member') }}" method="POST" role="form">
+                            @csrf
+                            <div class="form-group">
+                                <label for="">Email:</label>
+                                <input type="text" class="form-control" name="email" id="" placeholder="Email">
+                                <span class="help-block">His Random Password will be (123456)</span>
+                            </div>
+                        
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {{--  --}}
                 </div>
                 @endif()
                 {{-- displaying team members --}}
@@ -80,7 +126,7 @@
                         </tbody>
                     </table>
                 @else
-                   <h2 class="text-center">You've added any members yet!</h2>
+                   <h2 class="text-center">You haven't added any members yet!</h2>
                 @endif
                
              </div>

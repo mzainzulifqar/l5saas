@@ -4,7 +4,6 @@ namespace App\Models\Traits;
 
 trait HasSubscription
 {
-
 	/**
 	 * Check if user has subscription
 	 *
@@ -29,7 +28,6 @@ trait HasSubscription
 	 */
 	public function hasNotSubscribed()
 	{
-
 		return !$this->hasSubscribed();
 	}
 
@@ -40,7 +38,6 @@ trait HasSubscription
 	 */
 	public function hasPiggyBackSubscription()
 	{
-
 		$teams = auth()->user()->team_users;
 
 		if ($teams)
@@ -64,7 +61,6 @@ trait HasSubscription
 	 */
 	public function hasCancelledSubscription()
 	{
-
 		return optional($this->subscription('main'))->cancelled();
 	}
 
@@ -75,7 +71,6 @@ trait HasSubscription
 	 */
 	public function hasNotCancelledSubscription()
 	{
-
 		return !$this->hasCancelledSubscription();
 	}
 
@@ -86,7 +81,6 @@ trait HasSubscription
 	 */
 	public function isCustomer()
 	{
-
 		return $this->hasCardOnFile();
 	}
 
